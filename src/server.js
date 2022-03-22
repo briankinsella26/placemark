@@ -5,8 +5,6 @@ import Cookie from "@hapi/cookie";
 import dotenv from "dotenv";
 import path from "path";
 import Joi from "joi";
-import jwt from "hapi-auth-jwt2";
-import HapiSwagger from "hapi-swagger";
 import { fileURLToPath } from "url";
 import Handlebars from "handlebars";
 import { webRoutes } from "./web-routes.js";
@@ -23,21 +21,6 @@ if (result.error) {
   process.exit(1);
 }
 
-const swaggerOptions = {
-  info: {
-    title: "Playtime API",
-    version: "0.1"
-  },
-  securityDefinitions: {
-    jwt: {
-      type: "apiKey",
-      name: "Authorization",
-      in: "header"
-    }
-  },
-  security: [{ jwt: [] }]
-};
-
 async function init() {
   const server = Hapi.server({
     port: 3000,
@@ -47,16 +30,6 @@ async function init() {
   await server.register(Inert);
   await server.register(Vision);
   await server.register(Cookie);
-  await server.register(jwt);
-
-  await server.register([
-    Inert,
-    Vision,
-    {
-      plugin: HapiSwagger,
-      options: swaggerOptions
-    }
-  ]);
 
   server.validator(Joi);
 
