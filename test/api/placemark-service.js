@@ -1,0 +1,55 @@
+import axios from "axios";
+import { serviceUrl } from "../fixtures.js";
+
+export const placemarkService = {
+  placemarkUrl: serviceUrl,
+
+  async createUser(user) {
+    const res = await axios.post(`${this.placemarkUrl}/api/users`, user);
+    return res.data;
+  },
+
+  async getUser(id) {
+    const res = await axios.get(`${this.placemarkUrl}/api/users/${id}`);
+    return res.data;
+  },
+
+  async getAllUsers() {
+    try {
+      const res = await axios.get(`${this.placemarkUrl}/api/users`);
+      return res.data;
+    } catch (e) {
+      return null;
+    }
+  },
+
+  async deleteAllUsers() {
+    const res = await axios.delete(`${this.placemarkUrl}/api/users`);
+    return res.data;
+  },
+
+  async createplacemark(placemark) {
+    const res = await axios.post(`${this.placemarkUrl}/api/placemark`, placemark);
+    return res.data;
+  },
+
+  async deleteAllplacemarks() {
+    const response = await axios.delete(`${this.placemarkUrl}/api/placemark`);
+    return response.data;
+  },
+
+  async deleteplacemark(id) {
+    const response = await axios.delete(`${this.placemarkUrl}/api/placemark/${id}`);
+    return response;
+  },
+
+  async getAllplacemarks() {
+    const res = await axios.get(`${this.placemarkUrl}/api/placemark`);
+    return res.data;
+  },
+
+  async getplacemark(id) {
+    const res = await axios.get(`${this.placemarkUrl}/api/placemark/${id}`);
+    return res.data;
+  }
+};

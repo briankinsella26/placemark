@@ -1,0 +1,28 @@
+{{> menu}}
+
+<form class="box"  action="/placemark/editplacemark/{{placemark._id}}" method="POST">
+  <label>Update Placemark Details:</label>
+  <br/>
+  <br/>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <label for="name"><strong>Name</strong></label>
+        <input class="input" type="text" name="name", value="{{placemark.name}}">
+      </div>
+      <div class="field">
+        <label for="name"><strong>Description</strong></label>
+        <input class="input" type="text" name="description" value="{{placemark.description}}">
+      </div>
+      <div class="field">
+        <label for="name"><strong>Category</strong></label>
+        <input class="input" type="text"  name="category" value="{{placemark.category}}">
+      </div>
+      <div class="field">
+        <label for="name"><strong>Location</strong></label>
+        <input class="input" type="text"  name="location" value="{{placemark.location}}">
+      </div>
+    </div>
+  </div>
+  <button class="button is-primary">Update Placemark</button>
+</form>
