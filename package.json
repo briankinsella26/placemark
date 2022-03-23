@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node src/server.js",
     "lint": "./node_modules/.bin/eslint . --ext .js",
-    "test": "./node_modules/mocha/bin/mocha --exit tdd test/**/*.js",
-    "ci-test": "node src/server.js & ./node_modules/mocha/bin/mocha --ui tdd test/**/*.js --exit",
+    "test": "./node_modules/mocha/bin/mocha --ui tdd test/**/*.js --exit",
+    "ci-test": "./node_modules/mocha/bin/mocha --ui tdd test/**/*.js --exit",
     "testmodels": "./node_modules/mocha/bin/mocha --ui tdd test/models/**/*.js --exit",
     "testapi": "./node_modules/mocha/bin/mocha --ui tdd test/api/**/*.js --exit",
     "dev": "npx nodemon src/server.js"

@@ -43,7 +43,6 @@ export const placemarkMongoStore = {
     placemark.description = updatedPlacemark.description;
     placemark.category = updatedPlacemark.category;
     placemark.location = updatedPlacemark.location
-    console.log(placemark)
-    await Placemark.updateOne(placemark);
+    await Placemark.findByIdAndUpdate(placemark._id, placemark);
   },
 };

@@ -35,8 +35,8 @@ export const testUsers = [
 
 export const testPlacemarks = [{
   name: "Forlorn Point",
-  descption: "Rocky outcrop, fantastic views, even better fishing",
-  categories:[
+  description: "Rocky outcrop, fantastic views, even better fishing",
+  category:[
     "Fishing",
     "Stunning Landscape",
     "Coastal Walks"
@@ -45,8 +45,8 @@ export const testPlacemarks = [{
   },
   {
   name: "Forth Mountain",
-  descption: "Small mountain, fantastic views",
-  categories:[
+  description: "Small mountain, fantastic views",
+  category:[
     "Hiking",
     "Stunning Landscape",
     "Mountain Walks"
@@ -57,8 +57,8 @@ export const testPlacemarks = [{
 
 export const ballyhealyCastle = {
   name: "Ballyhealy Castle",
-  descption: "Normal castle, fantastic views",
-  categories:[
+  description: "Normal castle, fantastic views",
+  category:[
     "Historic",
     "Norman Way",
     "Castles"
@@ -68,10 +68,10 @@ export const ballyhealyCastle = {
 
 export const barygyCastle = {
   name: "Bargy Castle",
-  descption: "Normal castle, fantastic views",
-  categories:[
+  description: "Normal castle, views",
+  category:[
     "Historic",
-    "Norman Way",
+    "Chris De Burgh",
     "Castles"
     ],
   location: "Wexford"

@@ -1,0 +1,4 @@
+This is a placemark application
+
+To run on command line:
+npm run start
