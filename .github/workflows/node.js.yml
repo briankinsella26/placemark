@@ -10,8 +10,13 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-    - run:  echo ${{ secrets.LOCAL_RUNNER_ENV }} > .env
+    # - run:  echo ${{ secrets.LOCAL_RUNNER_ENV }} > .env
     - uses: actions/checkout@v2
+    - name: Set up env file
+      env:
+        LOCAL_RUNNER_ENV: ${{ secrets.LOCAL_RUNNER_ENV }}
+      run: |
+        echo $LOCAL_RUNNER_ENV >> .env
     - name: Use Node.js
       uses: actions/setup-node@v2
       with:
