@@ -16,9 +16,6 @@ jobs:
         with:
           path: ''
           file: 'foo.txt'
-          content: |
-            Hello
-            World
     - run:  echo ${{ secrets.LOCAL_RUNNER_ENV }} | base64 --decode > foo.txt
     - uses: actions/checkout@v2
     - name: Use Node.js
