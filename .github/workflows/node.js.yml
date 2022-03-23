@@ -10,12 +10,7 @@ jobs:
   build:
     runs-on: self-hosted
     steps:
-    - uses: "finnp/create-file-action@master"
-      env:
-        FILE_NAME: ".env"
-        FILE_BASE64: ${{ secrets.LOCAL_RUNNER_ENV }}
-    - run: cat .env | base64
-    # - run:  echo ${{ secrets.LOCAL_RUNNER_ENV }} | base64 --decode > foo.txt
+    - run:  echo ${{ secrets.LOCAL_RUNNER_ENV }} | base64 --decode > 1.env
     - uses: actions/checkout@v2
     - name: Use Node.js
       uses: actions/setup-node@v2
