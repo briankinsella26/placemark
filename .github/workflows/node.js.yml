@@ -19,4 +19,5 @@ jobs:
       with:
         cache: 'npm'
     - run: npm ci
-    - run: npm run ci-test
+    - run: npm run start 
+    - run: npm run test
