@@ -13,6 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - run: echo ${{ secrets.LOCAL_RUNNER_ENV }}
     - run:  echo ${{ secrets.LOCAL_RUNNER_ENV }} | base64 --decode > .env
     - name: Use Node.js
       uses: actions/setup-node@v2
