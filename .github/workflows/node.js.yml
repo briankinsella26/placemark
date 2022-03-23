@@ -19,5 +19,4 @@ jobs:
       with:
         cache: 'npm'
     - run: npm ci
-    - run: npm run start --if-present
-    - run: npm test
+    - run: npm ci-test

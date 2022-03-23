@@ -8,7 +8,8 @@
     "start": "node src/server.js",
     "lint": "./node_modules/.bin/eslint . --ext .js",
     "test": "./node_modules/mocha/bin/mocha --ui tdd test/**/*.js",
-    "dev": "npx nodemon  src/server.js"
+    "dev": "npx nodemon  src/server.js",
+    "ci-test": "node src/server.js && ./node_modules/mocha/bin/mocha --ui tdd test/**/*.js"
   },
   "author": "briankinsella",
   "license": "ISC",
