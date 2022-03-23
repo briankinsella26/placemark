@@ -13,9 +13,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - run: echo ${{ secrets.LOCAL_RUNNER_ENV }}
-    - run: echo Hello
-    - run: echo ${{ secrets.LOCAL_RUNNER_ENV }} | base64 --decode > .env
+    - name: Set up env file
+      env:
+        LOCAL_RUNNER_ENV: ${{ secrets.LOCAL_RUNNER_ENV }}
+      run: |
+        echo $LOCAL_RUNNER_ENV | base64 --decode >> .env
+    # - run: echo ${{ secrets.LOCAL_RUNNER_ENV }} | base64 --decode > .env
     - name: Use Node.js
       uses: actions/setup-node@v2
       with:
@@ -23,9 +26,3 @@ jobs:
     - run: npm ci
     - run: npm run start --if-present
     - run: npm test
-
-    #  - name: Set up env file
-    #   env:
-    #     LOCAL_RUNNER_ENV: ${{ secrets.LOCAL_RUNNER_ENV }}
-    #   run: |
-    #     echo $LOCAL_RUNNER_ENV >> .env
