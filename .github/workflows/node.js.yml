@@ -12,11 +12,12 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - uses: 1arp/create-a-file-action@0.2
-        with:
-          path: ''
-          file: 'foo.txt'
-    - run:  echo ${{ secrets.LOCAL_RUNNER_ENV }} | base64 --decode > foo.txt
+    - uses: "finnp/create-file-action@master"
+      env:
+        FILE_NAME: ".env"
+        FILE_BASE64: ${{ secrets.LOCAL_RUNNER_ENV }}
+    -run: cat .env | base64
+    # - run:  echo ${{ secrets.LOCAL_RUNNER_ENV }} | base64 --decode > foo.txt
     - uses: actions/checkout@v2
     - name: Use Node.js
       uses: actions/setup-node@v2
