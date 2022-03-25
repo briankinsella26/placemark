@@ -1,6 +1,7 @@
 /* eslint-disable func-names */
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
+import { PlacemarkSpec, PlacemarkSpecPlus } from "../models/joi-schemas.js";
 
 export const placemarkApi = {
   find: {
@@ -13,6 +14,10 @@ export const placemarkApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    response: { schema: PlacemarkArraySpec, failAction: validationError },
+    description: "Get all placemarks",
+    notes: "Returns all playlists",
   },
 
   findOne: {
@@ -28,6 +33,11 @@ export const placemarkApi = {
         return Boom.serverUnavailable("No placemark with this id");
       }
     },
+    tags: ["api"],
+    description: "Get a specific placemark",
+    notes: "Returns details of a placemark",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+    response: { schema: PlacemarkSpecPlus, failAction: validationError },
   },
 
   create: {
@@ -44,6 +54,11 @@ export const placemarkApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Create a placemark",
+    notes: "Returns the newly created placemark",
+    validate: { payload: PlacemarkSpec, failAction: validationError },
+    response: { schema: PlacemarkSpecPlus, failAction: validationError },
   },
 
   deleteOne: {
@@ -60,6 +75,9 @@ export const placemarkApi = {
         return Boom.serverUnavailable("No placemark with this id");
       }
     },
+    tags: ["api"],
+    description: "Delete a placemark",
+    validate: { params: { id: IdSpec }, failAction: validationError },
   },
 
   deleteAll: {
@@ -72,5 +90,7 @@ export const placemarkApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-  },
+  },    
+  tags: ["api"],
+  description: "Delete all Placemarks",
 };
