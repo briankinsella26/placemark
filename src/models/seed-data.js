@@ -27,6 +27,7 @@ export const seedData = {
       description: "seed description",
       category: ["seed category"],
       location: "seed location",
+      userid: "->users.bart"
     }
   }
 };

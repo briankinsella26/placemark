@@ -25,7 +25,7 @@ export const PlacemarkSpec = Joi.object()
   .keys({
     name: Joi.string().required().example("Lough Rea Boat House"),
     description: Joi.string().required().example("An mid century boat house to rent a boat for the lake"),
-    category: Joi.string().required().example("Fishing"),
+    category: Joi.array().required().example("Fishing"),
     location: Joi.string().required().example("Sample location"),
   })
   .label("Placemark");

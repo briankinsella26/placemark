@@ -1,11 +1,14 @@
 /* eslint-disable func-names */
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
-import { PlacemarkSpec, PlacemarkSpecPlus } from "../models/joi-schemas.js";
+import { PlacemarkSpec, PlacemarkSpecPlus, PlacemarkArraySpec, IdSpec } from "../models/joi-schemas.js";
+import { validationError } from "./logger.js";
 
 export const placemarkApi = {
   find: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const Placemarks = await db.placemarkStore.getAllPlacemarks();
@@ -17,11 +20,13 @@ export const placemarkApi = {
     tags: ["api"],
     response: { schema: PlacemarkArraySpec, failAction: validationError },
     description: "Get all placemarks",
-    notes: "Returns all playlists",
+    notes: "Returns all placemarks",
   },
 
   findOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     async handler(request) {
       try {
         const Placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
@@ -41,11 +46,13 @@ export const placemarkApi = {
   },
 
   create: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
-        const Placemark = request.payload;
-        const newPlacemark = await db.placemarkStore.addPlacemark(Placemark);
+        const placemark = request.payload;
+        const newPlacemark = await db.placemarkStore.addPlacemark(placemark);
         if (newPlacemark) {
           return h.response(newPlacemark).code(201);
         }
@@ -62,7 +69,9 @@ export const placemarkApi = {
   },
 
   deleteOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const Placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
@@ -81,7 +90,9 @@ export const placemarkApi = {
   },
 
   deleteAll: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         await db.placemarkStore.deleteAllPlacemarks();
@@ -90,7 +101,7 @@ export const placemarkApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Delete all Placemarks",
   },    
-  tags: ["api"],
-  description: "Delete all Placemarks",
 };
