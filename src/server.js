@@ -8,10 +8,12 @@ import Joi from "joi";
 import { fileURLToPath } from "url";
 import Handlebars from "handlebars";
 import HapiSwagger from "hapi-swagger";
+import jwt from "hapi-auth-jwt2";
 import { webRoutes } from "./web-routes.js";
 import { db } from "./models/db.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { apiRoutes } from "./api-routes.js";
+import { validate } from "./api/jwt-utils.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -43,6 +45,7 @@ async function init() {
       options: swaggerOptions,
     },
   ]);
+  await server.register(jwt);
   await server.register(Cookie);
 
   server.validator(Joi);
@@ -67,6 +70,12 @@ async function init() {
     },
     redirectTo: "/",
     validateFunc: accountsController.validate
+  });
+
+  server.auth.strategy("jwt", "jwt", {
+    key: process.env.cookie_password,
+    validate: validate,
+    verifyOptions: { algorithms: ["HS256"] }
   });
 
   server.auth.default("session");

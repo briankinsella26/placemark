@@ -30,12 +30,11 @@ suite("Placemark Model tests", () => {
     assert.isNull(await db.placemarkStore.getPlacemarkById());
   });
 
-   //todo
-  // test("update a placemark - success", async () => {
-  //   const placemark = await db.placemarkStore.addPlacemark(ballyhealyCastle);
-  //   const updatedPlacemark = await db.placemarkStore.editPlacemark(ballyhealyCastle, barygyCastle);
-  //   assert.equal(updatedPlacemark.name, barygyCastle.name)
-  // });
+  test("update a placemark - success", async () => {
+    const placemark = await db.placemarkStore.addPlacemark(barygyCastle);
+    await db.placemarkStore.editPlacemark(placemark, ballyhealyCastle);
+    assert.equal(placemark.name, ballyhealyCastle.name)
+  });
 
   test("delete a placemark - success", async () => {
     const placemark = await db.placemarkStore.addPlacemark(barygyCastle);
