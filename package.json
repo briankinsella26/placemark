@@ -6,11 +6,14 @@
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
+    "start-server": "npm run start",
     "lint": "./node_modules/.bin/eslint . --ext .js",
     "test": "./node_modules/mocha/bin/mocha --ui tdd test/**/*.js --exit",
+    "start-test": "npm run test",
     "ci-test": "./node_modules/mocha/bin/mocha --ui tdd test/**/*.js --exit",
     "testmodels": "./node_modules/mocha/bin/mocha --ui tdd test/models/**/*.js --exit",
     "testapi": "./node_modules/mocha/bin/mocha --ui tdd test/api/**/*.js --exit",
+    "ci": "start-server-and-test start-server http://localhost:3000 start-test",
     "dev": "npx nodemon src/server.js"
   },
   "author": "briankinsella",
@@ -24,7 +27,8 @@
     "eslint-plugin-import": "^2.25.4",
     "mocha": "^9.2.0",
     "nodemon": "^2.0.15",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "start-server-and-test": "^1.14.0"
   },
   "dependencies": {
     "@hapi/boom": "^9.1.4",
