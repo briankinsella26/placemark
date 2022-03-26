@@ -2,12 +2,20 @@
 import { assert } from "chai";
 import { placemarkService } from "./placemark-service.js";
 import { assertSubset } from "../test-utils.js";
-import { ballyhealyCastle, testPlacemarks } from "../fixtures.js";
+import { ballyhealyCastle, testPlacemarks, maggie, maggieCredentials } from "../fixtures.js";
+
+let user = null;
 
 suite("placemark API tests", () => {
 
   setup(async () => {
+    placemarkService.clearAuth();
+    user = await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggieCredentials);
     await placemarkService.deleteAllplacemarks();
+    await placemarkService.deleteAllUsers();
+    user = await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggieCredentials);
   });
 
   teardown(async () => {});
@@ -22,7 +30,7 @@ suite("placemark API tests", () => {
     const placemark = await placemarkService.createplacemark(ballyhealyCastle);
     const response = await placemarkService.deleteplacemark(placemark._id);
     assert.equal(response.status, 204);
-    try {
+    try { 
       const returnedplacemark = await placemarkService.getplacemark(placemark.id);
       assert.fail("Should not return a response");
     } catch (error) {

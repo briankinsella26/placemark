@@ -2,18 +2,20 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { placemarkService } from "./placemark-service.js";
-import { maggie, testUsers } from "../fixtures.js";
+import { maggie, testUsers, maggieCredentials } from "../fixtures.js";
 
 const users = new Array(testUsers.length);
 
 suite("User API tests", () => {
   setup(async () => {
     await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggieCredentials);
     await placemarkService.deleteAllUsers();
     for (let i = 0; i < testUsers.length; i += 1) {
       users[0] = await placemarkService.createUser(testUsers[i]);
     }
     await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggieCredentials);
   });
   teardown(async () => {});
 
@@ -28,6 +30,7 @@ suite("User API tests", () => {
     assert.equal(returnedUsers.length, 4);
     await placemarkService.deleteAllUsers();
     await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggieCredentials);
     returnedUsers = await placemarkService.getAllUsers();
     assert.equal(returnedUsers.length, 1);
   });
@@ -48,13 +51,15 @@ suite("User API tests", () => {
   });
 
   test("get a user - deleted user", async () => {
+    const firstUser = await placemarkService.getUser(users[0]._id);
     await placemarkService.deleteAllUsers();
     await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggieCredentials);
     try {
-      const returnedUser = await placemarkService.getUser(users[0]._id);
+      const deletedUser = await placemarkService.getUser(firstUser._id);
       assert.fail("Should not return a response");
     } catch (error) {
-      assert(error.response.data.message === "No User with this id");
+      assert.equal(error.response.data.message, "No User with this id");
       assert.equal(error.response.data.statusCode, 404);
     }
   });
