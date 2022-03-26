@@ -28,7 +28,8 @@ export const placemarkController = {
         name: request.payload.name,
         description: request.payload.description,
         category: request.payload.category,
-        location: request.payload.location,
+        latitude: request.payload.latitude,
+        longitude: request.payload.longitude,
       };
       await db.placemarkStore.editPlacemark(placemark, editedPlacemark);
       return h.redirect("/dashboard");

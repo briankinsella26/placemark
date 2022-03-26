@@ -21,19 +21,22 @@ export const UserSpecPlus = UserSpec.keys({
 
 export const UserArray = Joi.array().items(UserSpecPlus).label("UserArray");
 
-export const PlacemarkSpec = Joi.object()
-  .keys({
-    name: Joi.string().required().example("Lough Rea Boat House"),
-    description: Joi.string().required().example("An mid century boat house to rent a boat for the lake"),
-    category: Joi.array().required().example("Fishing"),
-    location: Joi.string().required().example("Sample location"),
-  })
-  .label("Placemark");
+// todo: move category to db
+export const PlacemarkSpecBase = Joi.object().keys({
+  name: Joi.string().required().example("Lough Rea Boat House"),
+  description: Joi.string().required().example("An mid century boat house to rent a boat for the lake"),
+  category: Joi.string().required().valid("Historic","Natural World", "Family", "Hiking", "Cycling").example("Hiking"),
+  }).label("PlacemarkBase");
+
+export const PlacemarkSpec = PlacemarkSpecBase.keys({
+  latitude: Joi.number().required().example(33.948615),
+  longitude: Joi.number().required().example(-118.401382),
+  }).label("Placemark");
 
 export const PlacemarkSpecPlus = PlacemarkSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
-}).label("PlacemarkPlus");
+    }).label("PlacemarkPlus");
 
 export const PlacemarkArraySpec = Joi.array().items(PlacemarkSpecPlus).label("PlacemarkArray");
 

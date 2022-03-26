@@ -31,7 +31,9 @@ export const dashboardController = {
         name: request.payload.name,
         description: request.payload.description,
         category: request.payload.category,
-        location: request.payload.location,
+        latitude: request.payload.latitude,
+        longitude: request.payload.longitude,
+
       };
       await db.placemarkStore.addPlacemark(newPlacemark);
       return h.redirect("/dashboard");
