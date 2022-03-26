@@ -1,6 +1,6 @@
 {{> menu}}
 
-<form class="box"  action="/placemark/editplacemark/{{placemark._id}}" method="POST">
+<form autocomplete="off" class="box" action="/placemark/editplacemark/{{placemark._id}}" method="POST">
   <label>Update Placemark Details:</label>
   <br/>
   <br/>
@@ -8,19 +8,30 @@
     <div class="field-body">
       <div class="field">
         <label for="name"><strong>Name</strong></label>
-        <input class="input" type="text" name="name", value="{{placemark.name}}">
+        <input autocomplete="false" class="input" type="text" name="name", value="{{placemark.name}}">
       </div>
       <div class="field">
         <label for="name"><strong>Description</strong></label>
-        <input class="input" type="text" name="description" value="{{placemark.description}}">
+        <input autocomplete="false" class="input" type="text" name="description" value="{{placemark.description}}">
       </div>
       <div class="field">
         <label for="name"><strong>Category</strong></label>
-        <input class="input" type="text"  name="category" value="{{placemark.category}}">
+        <input autocomplete="false" class="input" type="text" name="category" list="categories" value="{{placemark.category}}"/>
+          <datalist id="categories">
+            <option>Historic</option>
+            <option>Natural World</option>
+            <option>Family</option>
+            <option>Hiking</option>
+            <option>Cycling</option>
+          </datalist>
       </div>
       <div class="field">
-        <label for="name"><strong>Location</strong></label>
-        <input class="input" type="text"  name="location" value="{{placemark.location}}">
+        <label for="name"><strong>Latitude</strong></label>
+        <input autocomplete="false" class="input" type="float" name="latitude" value="{{placemark.latitude}}">
+      </div>
+      <div class="field">
+        <label for="name"><strong>Latitude</strong></label>
+        <input autocomplete="false" class="input" type="float" name="longitude" value="{{placemark.longitude}}">
       </div>
     </div>
   </div>

@@ -36,44 +36,32 @@ export const testUsers = [
 export const testPlacemarks = [{
   name: "Forlorn Point",
   description: "Rocky outcrop, fantastic views, even better fishing",
-  category:[
-    "Fishing",
-    "Stunning Landscape",
-    "Coastal Walks"
-    ],
-  location: "Kilmore Quay"
+  category: "Family",
+  latitude: 51.508742,
+  longitude: 7.6878,
   },
   {
   name: "Forth Mountain",
   description: "Small mountain, fantastic views",
-  category:[
-    "Hiking",
-    "Stunning Landscape",
-    "Mountain Walks"
-    ],
-  location: "Wexford"
+  category: "Hiking",
+  latitude: 51.508742,
+  longitude: 7.6878,
   }
 ];
 
 export const ballyhealyCastle = {
   name: "Ballyhealy Castle",
   description: "Normal castle, fantastic views",
-  category:[
-    "Historic",
-    "Norman Way",
-    "Castles"
-    ],
-  location: "Wexford"
+  category: "Historic",
+  latitude: 51.508742,
+  longitude: 7.6878,
 }
 
 export const barygyCastle = {
   name: "Bargy Castle",
   description: "Normal castle, views",
-  category:[
-    "Historic",
-    "Chris De Burgh",
-    "Castles"
-    ],
-  location: "Wexford"
+  category: "Historic",
+  latitude: 51.508742,
+  longitude: 7.6878,
 }
 

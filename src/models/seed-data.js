@@ -25,8 +25,9 @@ export const seedData = {
     boathouse: {
       name: "seed name",
       description: "seed description",
-      category: ["seed category"],
-      location: "seed location",
+      category: "Historic",
+      latitude: 33.948615,
+      longitude: -118.401382,
       userid: "->users.bart"
     }
   }
