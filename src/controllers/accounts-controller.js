@@ -26,9 +26,11 @@ export const accountsController = {
       },
     },
     handler: async function (request, h) {
-      const user = request.payload;
-      await db.userStore.addUser(user);
-      return h.redirect("/");
+      const userPayload = request.payload;
+      userPayload.scope = "user";
+      const user = await db.userStore.addUser(userPayload);
+      request.cookieAuth.set({ id: user._id });
+      return h.redirect("/dashboard");
     },
   },
   showLogin: {

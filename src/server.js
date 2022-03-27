@@ -66,7 +66,7 @@ async function init() {
     cookie: {
       name: process.env.cookie_name,
       password: process.env.cookie_password,
-      isSecure: false
+      isSecure: false,
     },
     redirectTo: "/",
     validateFunc: accountsController.validate

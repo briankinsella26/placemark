@@ -31,6 +31,7 @@ export const placemarkController = {
         latitude: request.payload.latitude,
         longitude: request.payload.longitude,
       };
+      // const {returnUrl} = request.headers;
       await db.placemarkStore.editPlacemark(placemark, editedPlacemark);
       return h.redirect("/dashboard");
     },
