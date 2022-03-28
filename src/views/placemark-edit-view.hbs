@@ -1,7 +1,17 @@
-{{> menu active="dashboard"}}
+{{#if admin}}
+  {{> admin-menu}}
+{{else}}
+  {{> menu}}
+{{/if}}
 
 <section class="section">
   <h1> <strong>Update Placemark<strong></h1>
   <br>
   {{> placemark-edit}}
+  <br>
+  <br>
+  <br>
+  <div>
+    {{> placemark-image-upload }}
+  </div>
 </section>

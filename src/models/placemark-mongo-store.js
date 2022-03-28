@@ -38,6 +38,12 @@ export const placemarkMongoStore = {
     await Placemark.deleteMany({});
   },
 
+  async addImageToPlacemark(updatedPlacemark) {
+    const placemark = await Placemark.findOne({ _id: updatedPlacemark._id });
+    placemark.img = updatedPlacemark.img;
+    await placemark.save();
+  },
+
   async updatePlacemark(placemark, updatedPlacemark) {
     placemark.name = updatedPlacemark.name;
     placemark.description = updatedPlacemark.description;
