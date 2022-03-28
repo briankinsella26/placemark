@@ -1,7 +1,20 @@
-{{> menu active="dashboard"}}
+{{#if admin}}
+  {{> admin-menu}}
+{{else}}
+  {{> menu}}
+{{/if}}
 
-<section class="section">
-  <h1> <strong>Placemark Details<strong></h1>
+<section>
+  <div class="column has-text-centered">
+    <h1> <strong>Placemark Details<strong></h1>
+    <br>
+    {{> placemark-details}}
+  </div>
   <br>
-  {{> placemark-details}}
+  <br>
+  <br>
+  <div>
+    {{> placemark-image }}
+  </div>
 </section>
+

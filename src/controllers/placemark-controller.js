@@ -1,14 +1,18 @@
 /* eslint-disable func-names */
 import { PlacemarkSpecPlus } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
+import { imageStore } from "../models/image-store.js";
 
 export const placemarkController = {
   index: {
     handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+      const admin = loggedInUser.scope.includes("admin")
       const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
       const viewData = {
         title: "Placemark",
         placemark: placemark,
+        admin: admin
       };
       return h.view("placemark-view", viewData);
     },
@@ -16,10 +20,13 @@ export const placemarkController = {
 
   editPlacemark: {
     handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+      const admin = loggedInUser.scope.includes("admin")
       const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
       const viewData = {
         title: "Placemark",
         placemark: placemark,
+        admin: admin
       };
       return h.view("placemark-edit-view", viewData);
     },
@@ -47,6 +54,41 @@ export const placemarkController = {
       return h.redirect(loggedInUser.scope.includes("admin")?"/admin":"/dashboard");
     },
   },
+
+  uploadImage: {
+    handler: async function(request, h) {
+      try {
+        const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
+        const file = request.payload.imagefile;
+        if (Object.keys(file).length > 0) {
+          const url = await imageStore.uploadImage(request.payload.imagefile);
+          placemark.img = url;
+          db.placemarkStore.addImageToPlacemark(placemark);
+        }
+        return h.redirect(`/placemark/editplacemark/${placemark._id}`);
+      } catch (err) {
+        console.log(err);
+        return h.redirect(`/placemark/editplacemark/${placemark._id}`);
+      }
+    },
+    payload: {
+      multipart: true,
+      output: "data",
+      maxBytes: 209715200,
+      parse: true
+    }
+  },
+  
+  // deleteImage: {
+  //   handler: async function (request, h) {
+  //     try {
+  //       await db.imageStore.deleteImage(request.params.id);
+  //       return h.redirect(`/placemark/${placemark._id}`);
+  //   } catch (err) {
+  //       console.log(err);
+  //       return h.redirect(`/placemark/${placemark._id}`);
+  //   }
+  // },
 
   deletePlacemark: {
     handler: async function (request, h) {
