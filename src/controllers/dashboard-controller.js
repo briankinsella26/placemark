@@ -39,11 +39,4 @@ export const dashboardController = {
       return h.redirect("/dashboard");
     },
   },
-
-  deletePlacemark: {
-    handler: async function (request, h) {
-      await db.placemarkStore.deletePlacemarkById(request.params.id);
-      return h.redirect("/dashboard");
-    },
-  },
 };
