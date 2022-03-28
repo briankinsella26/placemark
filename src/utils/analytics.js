@@ -29,7 +29,6 @@ export const analytics = {
   async getLatesPlacemarks(noOfPlacemarks){
     const placemarks = await db.placemarkStore.getAllPlacemarks();
     placemarks.sort((a, b) => b.createdate - a.createdate);
-    console.log(placemarks);
     return placemarks.slice(0, noOfPlacemarks);
   },
 

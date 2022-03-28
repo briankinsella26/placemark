@@ -55,10 +55,7 @@ export const accountsController = {
         return h.redirect("/");
       }
       request.cookieAuth.set({ id: user._id });
-      if(user.email === "admin@admin.com") {
-        return h.redirect("/admin");
-      }
-      return h.redirect("/dashboard");
+      return h.redirect(user.scope.includes("admin")?"/admin":"/dashboard");
     },
   },
   logout: {
