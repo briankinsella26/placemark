@@ -19,4 +19,4 @@ jobs:
       with:
         cache: 'npm'
     - run: npm ci
-    - run: npm run testmodels
+    - run: npm run ci
