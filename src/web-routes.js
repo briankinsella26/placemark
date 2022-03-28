@@ -16,10 +16,11 @@ export const webRoutes = [
 
   { method: "GET", path: "/dashboard", config: dashboardController.index },
   { method: "POST", path: "/dashboard/addplacemark", config: dashboardController.addPlacemark },
-  { method: "GET", path: "/dashboard/deleteplacemark/{id}", config: dashboardController.deletePlacemark },
 
   { method: "GET", path: "/placemark/{id}", config: placemarkController.index },
-  { method: "POST", path: "/placemark/editplacemark/{id}", config: placemarkController.editPlacemark },
+  { method: "GET", path: "/placemark/editplacemark/{id}", config: placemarkController.editPlacemark },
+  { method: "POST", path: "/placemark/updateplacemark/{id}", config: placemarkController.updatePlacemark },
+  { method: "GET", path: "/placemark/deleteplacemark/{id}", config: placemarkController.deletePlacemark },
 
   { method: "GET", path: "/admin", config: adminController.index},
   { method: "GET", path: "/admin/placemarks", config: adminController.getPlacemarks},

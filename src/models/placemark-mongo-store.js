@@ -38,7 +38,7 @@ export const placemarkMongoStore = {
     await Placemark.deleteMany({});
   },
 
-  async editPlacemark(placemark, updatedPlacemark) {
+  async updatePlacemark(placemark, updatedPlacemark) {
     placemark.name = updatedPlacemark.name;
     placemark.description = updatedPlacemark.description;
     placemark.category = updatedPlacemark.category;
