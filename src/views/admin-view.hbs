@@ -1,0 +1,27 @@
+{{> admin-menu active="admin-dashboard"}}
+
+<section class="section">
+  <h1> <strong>ADMIN DASHBOARD<strong></h1>
+  <br>
+  <br>
+  <br>
+  <div>
+    <h2> <strong> Total Users: <strong> {{totalUsers}} </h2>
+  </div>
+  <br>
+  <div>
+    <h2> <strong> Number of new users in past 24 hours: <strong> {{noOfNewUsers}} </h2>
+  </div>
+    <br>
+  <div>
+    <h2> <strong> Total Placemarks: {{totalPlacemarks}}<strong></h2>
+  </div>
+    <br>
+    <br>
+    <br>
+  <div>
+    <h2> <strong> Latest placemarks<strong></h2>
+  </div>
+  <br>
+  {{> list-placemarks}}
+</section>

@@ -23,6 +23,7 @@ export const placemarkController = {
       },
     },
     handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
       const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
       const editedPlacemark = {
         name: request.payload.name,
@@ -32,14 +33,14 @@ export const placemarkController = {
         longitude: request.payload.longitude,
       };
       await db.placemarkStore.editPlacemark(placemark, editedPlacemark);
-      return h.redirect("/dashboard");
+      return h.redirect(loggedInUser.scope.includes("admin")?"/admin":"/dashboard");
     },
   },
 
   deletePlacemark: {
     handler: async function (request, h) {
       await db.placemarkStore.deletePlacemark(request.params.id);
-      return h.redirect("/dashboard");
+      return h.redirect(loggedInUser.scope.includes("admin")?"/admin":"/dashboard");
     },
   },
 };
