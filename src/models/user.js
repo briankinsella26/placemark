@@ -7,7 +7,8 @@ const userSchema = new Schema({
   lastName: String,
   email: String,
   password: String,
-  scope:[]
+  scope:[],
+  signupDate: {type: Date, default: Date.now}
 });
 
 export const User = Mongoose.model("User", userSchema);

@@ -33,12 +33,53 @@ export const seedData = {
   placemarks: {
     _model: "Placemark",
     boathouse: {
-      name: "seed name",
-      description: "seed description",
-      category: "Historic",
+      name: "Lough Rea Boathouse",
+      description: "On a lake",
+      category: "Natural World",
       latitude: 33.948615,
       longitude: -118.401382,
       userid: "->users.bart"
-    }
+    },
+    bargyCastle: {
+      name: "Bargy Castle",
+      description: "Normal Castle, Historic",
+      category: "Historic",
+      latitude: 33.948615,
+      longitude: -118.401382,
+      userid: "->users.homer"
+    },
+    mountLeinster: {
+      name: "Mount Leinster",
+      description: "Spectacular Mountain",
+      category: "Natural World",
+      latitude: 33.948615,
+      longitude: -118.401382,
+      userid: "->users.bart"
+    },
+    centerParks: {
+      name: "Center Parks",
+      description: "Woodland Adventure",
+      category: "Family",
+      latitude: 33.948615,
+      longitude: -118.401382,
+      userid: "->users.marge"
+    },
+    castlegregoryBeach: {
+      name: "Castlegregory Beach",
+      description: "White Sands",
+      category: "Natural World",
+      latitude: 33.948615,
+      longitude: -118.401382,
+      userid: "->users.marge"
+    },
+    megalithicTombs: {
+      name: "Boyne Valley Tombs",
+      description: "Tombs",
+      category: "Historic",
+      latitude: 33.948615,
+      longitude: -118.401382,
+      userid: "->users.homer"
+    },
+    
   }
 };
