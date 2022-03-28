@@ -32,7 +32,7 @@ suite("Placemark Model tests", () => {
 
   test("update a placemark - success", async () => {
     const placemark = await db.placemarkStore.addPlacemark(barygyCastle);
-    await db.placemarkStore.editPlacemark(placemark, ballyhealyCastle);
+    await db.placemarkStore.updatePlacemark(placemark, ballyhealyCastle);
     assert.equal(placemark.name, ballyhealyCastle.name)
   });
 
