@@ -40,7 +40,7 @@ export const placemarkMongoStore = {
 
   async addImageToPlacemark(updatedPlacemark) {
     const placemark = await Placemark.findOne({ _id: updatedPlacemark._id });
-    placemark.img = updatedPlacemark.img;
+    placemark.img.push(updatedPlacemark.img);
     await placemark.save();
   },
 

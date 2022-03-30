@@ -1,7 +1,15 @@
 <div class="card">
   <div class="card-image">
     <figure class="image is-256x256">
-      <img src={{placemark.img}}>
+      {{#each placemark.img}}
+        <img src={{ this }}>
+         <a href="/editplacemark/{{placemark._id}}/deleteimage/{{ this }}" class="ui icon button"> 
+          <i class="fas fa-trash"></i>
+        </a>
+        <br>
+        <br>
+        <br>
+      {{/each}}
     </figure>
   </div>
   <div class="card-content">

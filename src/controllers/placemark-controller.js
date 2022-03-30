@@ -12,6 +12,7 @@ export const placemarkController = {
       const viewData = {
         title: "Placemark",
         placemark: placemark,
+        img: placemark.img,
         admin: admin
       };
       return h.view("placemark-view", viewData);
@@ -79,16 +80,17 @@ export const placemarkController = {
     }
   },
   
-  // deleteImage: {
-  //   handler: async function (request, h) {
-  //     try {
-  //       await db.imageStore.deleteImage(request.params.id);
-  //       return h.redirect(`/placemark/${placemark._id}`);
-  //   } catch (err) {
-  //       console.log(err);
-  //       return h.redirect(`/placemark/${placemark._id}`);
-  //   }
-  // },
+  deleteImage: {
+    handler: async function (request, h) {
+      try {
+        await db.imageStore.deleteImage(request.params.id);
+        return h.redirect(`/placemark/${placemark._id}`);
+      } catch (err) {
+        console.log(err);
+        return h.redirect(`/placemark/${placemark._id}`);
+      }
+    }
+  },
 
   deletePlacemark: {
     handler: async function (request, h) {
@@ -97,4 +99,4 @@ export const placemarkController = {
       return h.redirect(loggedInUser.scope.includes("admin")?"/admin":"/dashboard");
     },
   },
-};
+}
