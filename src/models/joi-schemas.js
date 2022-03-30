@@ -30,6 +30,7 @@ export const PlacemarkSpecBase = Joi.object().keys({
   description: Joi.string().required().example("An mid century boat house to rent a boat for the lake"),
   category: Joi.string().required().valid("Historic","Natural World", "Family", "Hiking", "Cycling").example("Hiking"),
   createdate: Joi.date(),
+  img: Joi.array(),
   }).label("PlacemarkBase");
 
 export const PlacemarkSpec = PlacemarkSpecBase.keys({

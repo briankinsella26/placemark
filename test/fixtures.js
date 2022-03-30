@@ -39,6 +39,7 @@ export const testPlacemarks = [{
   category: "Family",
   latitude: 51.508742,
   longitude: 7.6878,
+  img: []
   },
   {
   name: "Forth Mountain",
@@ -46,6 +47,7 @@ export const testPlacemarks = [{
   category: "Hiking",
   latitude: 51.508742,
   longitude: 7.6878,
+  img: []
   }
 ];
 
@@ -55,6 +57,7 @@ export const ballyhealyCastle = {
   category: "Historic",
   latitude: 51.508742,
   longitude: 7.6878,
+  img: []
 }
 
 export const barygyCastle = {
@@ -63,5 +66,6 @@ export const barygyCastle = {
   category: "Historic",
   latitude: 51.508742,
   longitude: 7.6878,
+  img: []
 }
 

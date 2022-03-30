@@ -12,6 +12,7 @@ export const placemarkController = {
       const viewData = {
         title: "Placemark",
         placemark: placemark,
+        img: placemark.img,
         admin: admin
       };
       return h.view("placemark-view", viewData);
@@ -61,8 +62,9 @@ export const placemarkController = {
         const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
         const file = request.payload.imagefile;
         if (Object.keys(file).length > 0) {
-          const url = await imageStore.uploadImage(request.payload.imagefile);
-          placemark.img = url;
+          const response = await imageStore.uploadImage(request.payload.imagefile);
+          placemark.img = response;
+          placemark.img.tags.push({placemarkid: request.params.id})
           db.placemarkStore.addImageToPlacemark(placemark);
         }
         return h.redirect(`/placemark/editplacemark/${placemark._id}`);
@@ -79,16 +81,21 @@ export const placemarkController = {
     }
   },
   
-  // deleteImage: {
-  //   handler: async function (request, h) {
-  //     try {
-  //       await db.imageStore.deleteImage(request.params.id);
-  //       return h.redirect(`/placemark/${placemark._id}`);
-  //   } catch (err) {
-  //       console.log(err);
-  //       return h.redirect(`/placemark/${placemark._id}`);
-  //   }
-  // },
+  deleteImage: {
+    handler: async function (request, h) {
+      try {
+        const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
+        const updatedPlacemark = placemark;
+        updatedPlacemark.img = placemark.img.filter(( img ) => img.public_id !== request.params.imageid);
+        db.placemarkStore.updatePlacemark(placemark, updatedPlacemark)
+        await imageStore.deleteImage(request.params.imageid);
+        return h.redirect(`/placemark/${placemark._id}`);
+      } catch (err) {
+        console.log(err);
+        return h.redirect(`/placemark/${placemark._id}`);
+      }
+    }
+  },
 
   deletePlacemark: {
     handler: async function (request, h) {
@@ -97,4 +104,12 @@ export const placemarkController = {
       return h.redirect(loggedInUser.scope.includes("admin")?"/admin":"/dashboard");
     },
   },
-};
+}
+
+
+// let imgArray;
+// for(let i = 0; placemark.img.length; i+=1) {
+//   if(placemark.img[i] !== request.params.imageid) {
+//     imgArray.push(placemark.img[i]);
+//   }
+// }

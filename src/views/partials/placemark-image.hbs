@@ -1,7 +1,9 @@
 <div class="card">
   <div class="card-image">
     <figure class="image is-256x256">
-      <img src={{placemark.img}}>
+      {{#each placemark.img}}
+        <img src={{ this.url }}>
+      {{/each}}
     </figure>
   </div>
 </div>

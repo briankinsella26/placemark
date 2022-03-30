@@ -21,10 +21,10 @@ export const imageStore = {
   uploadImage: async function(imagefile) {
     await writeFileSync("./public/temp.img", imagefile);
     const response = await cloudinary.v2.uploader.upload("./public/temp.img");
-    return response.url;
+    return response;
   },
 
   deleteImage: async function(img) {
-    await cloudinary.v2.uploader.destroy(img, {});
+    const response = await cloudinary.v2.uploader.destroy(img, {});
   }
 };
