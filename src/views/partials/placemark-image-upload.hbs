@@ -2,8 +2,8 @@
   <div class="card-image">
     <figure class="image is-256x256">
       {{#each placemark.img}}
-        <img src={{ this }}>
-         <a href="/editplacemark/{{placemark._id}}/deleteimage/{{ this }}" class="ui icon button"> 
+        <img src={{ this.url }}>
+         <a href="/placemark/editplacemark/{{ this.tags.0.placemarkid }}/deleteimage/{{ this.public_id }}" class="ui icon button"> 
           <i class="fas fa-trash"></i>
         </a>
         <br>
