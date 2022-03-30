@@ -27,6 +27,19 @@ export const userMongoStore = {
     return user;
   },
 
+  async updateUser(updatedUser) {
+    console.log(updatedUser)
+    await User.findByIdAndUpdate(updatedUser._id, updatedUser)
+  },
+
+  async updatePlacemark(placemark, updatedPlacemark) {
+    placemark.name = updatedPlacemark.name;
+    placemark.description = updatedPlacemark.description;
+    placemark.category = updatedPlacemark.category;
+    placemark.location = updatedPlacemark.location
+    await Placemark.findByIdAndUpdate(placemark._id, placemark);
+  },
+
   async deleteUserById(id) {
     try {
       await User.deleteOne({ _id: id });

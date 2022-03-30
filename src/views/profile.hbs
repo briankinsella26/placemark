@@ -1,0 +1,35 @@
+{{> menu active="profile"}}
+
+<section class="section">
+<h1 class="title">{{title}}</h1>
+<br>
+<br>
+  <form autocomplete="off" class="box" action="/profile" method="POST">
+    <br/>
+    <br/>
+    <div class="field is-horizontal">
+      <div class="field-body">
+        <div class="field">
+          <label for="firstName"><strong>First Name</strong></label>
+          <input autocomplete="false" class="input" type="text" name="firstName", value="{{user.firstName}}">
+        </div>
+        <div class="field">
+          <label for="lastnNme"><strong>Last Name</strong></label>
+          <input autocomplete="false" class="input" type="text" name="lastName" value="{{user.lastName}}">
+        </div>
+        <div class="field">
+          <label for="email"><strong>Email</strong></label>
+          <input autocomplete="false" class="input" type="text" name="email" value="{{user.email}}">
+        </div>
+        <div class="field">
+          <label for="password"><strong>Password</strong></label>
+          <input autocomplete="false" class="input" type="password" name="password" value="{{user.password}}">
+        </div>
+      </div>
+    </div>
+    <button class="button is-primary">Update User</button>
+  </form>
+    <form autocomplete="off" class="box" action="/profile/delete" method="GET">
+    <button style="color: red" class="button is-secondary">Delete Account</button>
+  </form>
+</section>
