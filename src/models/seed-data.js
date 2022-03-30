@@ -80,6 +80,30 @@ export const seedData = {
       longitude: -118.401382,
       userid: "->users.homer"
     },
+    newgrange: {
+      name: "Newgrange",
+      description: "Tombs",
+      category: "Historic",
+      latitude: 33.948615,
+      longitude: -118.401382,
+      userid: "->users.homer"
+    },
+    waterfordgreenway: {
+      name: "Waterford Greenway",
+      description: "Scenic cycle for all the family",
+      category: "Family",
+      latitude: 33.948615,
+      longitude: -118.401382,
+      userid: "->users.homer"
+    },
+    giantscauseway: {
+      name: "Giants Causway",
+      description: "Beautiful landscape",
+      category: "Natural World",
+      latitude: 33.948615,
+      longitude: -118.401382,
+      userid: "->users.homer"
+    },
     
   }
 };

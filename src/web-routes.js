@@ -15,6 +15,7 @@ export const webRoutes = [
   { method: "GET", path: "/about", config: aboutController.index },
 
   { method: "GET", path: "/dashboard", config: dashboardController.index },
+  { method: "GET", path: "/dashboard/filter", config: dashboardController.filter },
   { method: "POST", path: "/dashboard/addplacemark", config: dashboardController.addPlacemark },
 
   { method: "GET", path: "/placemark/{id}", config: placemarkController.index },
@@ -25,6 +26,7 @@ export const webRoutes = [
 
   { method: "GET", path: "/admin", config: adminController.index},
   { method: "GET", path: "/admin/placemarks", config: adminController.getPlacemarks},
+  { method: "GET", path: "/admin/placemarks/filter", config: adminController.filter },
   { method: "GET", path: "/admin/users", config: adminController.getUsers},
   { method: "GET", path: "/admin/users/{id}", config: adminController.getUserDetails},
   { method: "GET", path: "/admin/deleteuser/{id}", config: adminController.deleteUser},
