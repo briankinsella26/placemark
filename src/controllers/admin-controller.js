@@ -96,18 +96,14 @@ export const adminController = {
   },
 
   deleteUser: {
-    auth: {
-      strategy: "session",
-      scope: "admin"
-    },
     handler: async function (request, h) {
-      const user = await db.userStore.getUserById(request.params.id);
-      if(user.email === "admin@admin.com") {
+      const deleteUser = await db.userStore.getUserById(request.params.id);
+      if(deleteUser.scope.includes("admin")) {
         console.log("Cannot delete admin user")
       } else {
         await db.userStore.deleteUserById(request.params.id);
       }
       return h.redirect("/admin");
-    }
+    },
   },
 }

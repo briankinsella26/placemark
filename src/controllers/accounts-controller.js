@@ -65,6 +65,41 @@ export const accountsController = {
     },
   },
 
+  profile: {
+    handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+      const viewData = {
+        title: "My Profile",
+        user: loggedInUser,
+      };
+      return h.view("profile", viewData);
+    }
+  },
+
+  editProfile: {
+    handler: async function (request, h) {
+      const { email, password } = request.payload;
+      const user = await db.userStore.getUserByEmail(email);
+      user.firstName = request.payload.firstName;
+      user.lastName = request.payload.lastName;
+      if (request.payload.password.length > 0) {
+        user.password = request.payload.password;
+      }
+      user.email = request.payload.email;
+      await db.userStore.updateUser(user);
+      return h.redirect("/dashboard");
+    }
+  },
+
+  deleteUser: {
+    handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+      await db.userStore.deleteUserById(loggedInUser._id);
+      request.cookieAuth.clear();
+      return h.redirect("/");
+    },
+  },
+
   async validate(request, session) {
     const user = await db.userStore.getUserById(session.id);
     if (!user) {
