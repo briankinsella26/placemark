@@ -11,6 +11,26 @@ export const dashboardController = {
         title: "Placemark Dashboard",
         user: loggedInUser,
         placemarks: placemarks,
+        path: loggedInUser.scope.includes("admin")?"/admin/placemarks":"/dashboard"
+      };
+      return h.view("dashboard-view", viewData);
+    },
+  },
+
+  filter: {
+    handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+      const placemarks = await db.placemarkStore.getUserPlacemarks(loggedInUser._id);
+      let filteredPlacemarks = placemarks.filter((placemark) => placemark.category === request.query.category);
+        if(request.query.category === "All") {
+          filteredPlacemarks = placemarks
+        }
+      const viewData = {
+        category: request.query.category,
+        title: "Category",
+        user: loggedInUser,
+        placemarks: filteredPlacemarks,
+        path: loggedInUser.scope.includes("admin")?"/admin/placemarks":"/dashboard"
       };
       return h.view("dashboard-view", viewData);
     },

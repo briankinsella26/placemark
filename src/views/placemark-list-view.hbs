@@ -1,7 +1,14 @@
 {{> admin-menu active="admin-placemarks"}}
 
 <section class="section">
-  <h1> <strong>All Placemarks<strong></h1>
+  <h1> <strong>Placemarks<strong></h1>
+  <br>
+  <div class="container">
+    <div class="columns is-centered">
+      {{> placemark-filter}}
+    </div>
+  </div>
+  <br>
   <br>
   {{> list-placemarks}}
 </section>

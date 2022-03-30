@@ -28,6 +28,24 @@ export const adminController = {
     },
   },
 
+  filter: {
+    handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+      const placemarks = await db.placemarkStore.getAllPlacemarks();
+      let filteredPlacemarks = placemarks.filter((placemark) => placemark.category === request.query.category);
+        if(request.query.category === "All") {
+          filteredPlacemarks = placemarks
+        }
+      const viewData = {
+        category: request.query.category,
+        title: "Category",
+        placemarks: filteredPlacemarks,
+        path: loggedInUser.scope.includes("admin")?"/admin/placemarks":"/dashboard"
+      };
+      return h.view("placemark-list-view", viewData);
+    },
+  },
+
   getUsers: {
     auth: {
       strategy: "session",
@@ -66,10 +84,12 @@ export const adminController = {
       scope: "admin"
     },
     handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
       const placemarks = await db.placemarkStore.getAllPlacemarks();
       const viewData = {
         title: "List of all placemarks",
-        placemarks: placemarks
+        placemarks: placemarks,
+        path: loggedInUser.scope.includes("admin")?"/admin/placemarks":"/dashboard"
       };
       return h.view("placemark-list-view", viewData);
     },

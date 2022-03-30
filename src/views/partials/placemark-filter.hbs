@@ -1,0 +1,45 @@
+<section class="section">
+  <h1><strong>Select a category</strong></h1>
+  <div class="dropdown">
+    <div class="dropdown-trigger" >
+      <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2">
+        <span id="category" placeholder="Select">{{ category }}</span>
+        <span class="icon is-small">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+      <div class="dropdown-content">
+        <a href="{{path}}/filter?category=All" class="dropdown-item">
+          All
+        </a>
+        <a href="{{path}}/filter?category=Historic" class="dropdown-item">
+          Historic
+        </a>
+        <a href="{{path}}/filter?category=Natural World" class="dropdown-item">
+          Natural World
+        </a>
+        <a href="{{path}}/filter?category=Family" class="dropdown-item">
+          Family
+        </a>
+        <a href="{{path}}/filter?category=Hiking" class="dropdown-item">
+          Hiking
+        </a>
+        <a href="{{path}}/filter?category=Cycling" class="dropdown-item">
+          Cycling
+        </a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+document.querySelectorAll('.dropdown').forEach(item => {
+    item.addEventListener('click', function(event) {
+        event.stopPropagation();
+        item.classList.toggle('is-active');
+    });
+});
+</script>
