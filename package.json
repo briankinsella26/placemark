@@ -4,6 +4,9 @@
   "description": "An application to track tourist attractions in Ireland",
   "main": "src/server.js",
   "type": "module",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "node src/server.js",
     "start-server": "npm run start",
