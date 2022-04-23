@@ -1,4 +1,5 @@
 
+import fs from "fs";
 import { db } from "../models/db.js";
 
 export const analytics = {
@@ -31,5 +32,12 @@ export const analytics = {
     placemarks.sort((a, b) => b.createdate - a.createdate);
     return placemarks.slice(0, noOfPlacemarks);
   },
+
+  async getInstanceId(){
+    const instanceId = fs.readFileSync("instanceId.txt").toString()
+    console.log(instanceId)
+    return instanceId;
+  },
+
 
 }

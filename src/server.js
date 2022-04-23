@@ -14,7 +14,7 @@ import { db } from "./models/db.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { apiRoutes } from "./api-routes.js";
 import { validate } from "./api/jwt-utils.js";
-import { secrets } from "../getSecrets";
+// import { secrets } from "../getSecrets";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,8 +33,8 @@ if (result.error) {
 }
 
 async function init() {
-  const secretsString = await secrets();
-  await fs.writeFile(".env", secretsString);
+  // const secretsString = await secrets();
+  // await fs.writeFile(".env", secretsString);
   const server = Hapi.server({
     port: process.env.PORT || 3000,
   });
