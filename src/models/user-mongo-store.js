@@ -28,7 +28,6 @@ export const userMongoStore = {
   },
 
   async updateUser(updatedUser) {
-    console.log(updatedUser)
     await User.findByIdAndUpdate(updatedUser._id, updatedUser)
   },
 
