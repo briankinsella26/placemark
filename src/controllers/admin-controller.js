@@ -15,6 +15,7 @@ export const adminController = {
       const placemarks = await analytics.getLatesPlacemarks(5);
       const totalUsers = await analytics.getTotalUsers();
       const totalPlacemarks = await analytics.getTotalPlacemarks();
+      const instanceId = await analytics.getInstanceId();
       
       const viewData = {
         title: "Admin Dashboard",
@@ -23,6 +24,7 @@ export const adminController = {
         placemarks: placemarks,
         totalUsers: totalUsers,
         totalPlacemarks: totalPlacemarks,
+        instanceId: instanceId
       };
       return h.view("admin-view", viewData);
     },
