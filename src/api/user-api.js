@@ -18,7 +18,7 @@ export const userApi = {
           return Boom.unauthorized("Invalid password");
         } 
         const token = createToken(user);
-        return h.response({ success: true, token: token }).code(201);
+        return h.response({ success: true, token: token, id: user._id, scope: user.scope}).code(201);
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
       }
@@ -87,6 +87,26 @@ export const userApi = {
     tags: ["api"],
     description: "Create a User",
     notes: "Returns the newly created user",
+    validate: { payload: UserSpec, failAction: validationError },
+    response: { schema: UserSpecPlus, failAction: validationError },
+  },
+  
+  update: {
+    auth: false,
+    handler: async function (request, h) {
+      try {
+        const user = await db.userStore.updateUser(request.payload);
+        if (user) {
+          return h.response(user).code(200);
+        }
+        return Boom.badImplementation("error updating user");
+      } catch (err) {
+        return Boom.serverUnavailable("Database Error");
+      }
+    },
+    tags: ["api"],
+    description: "Update a User",
+    notes: "Updates a user and returns 200",
     validate: { payload: UserSpec, failAction: validationError },
     response: { schema: UserSpecPlus, failAction: validationError },
   },

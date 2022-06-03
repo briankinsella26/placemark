@@ -31,6 +31,7 @@ export const PlacemarkSpecBase = Joi.object().keys({
   category: Joi.string().required().valid("Historic","Natural World", "Family", "Hiking", "Cycling").example("Hiking"),
   createdate: Joi.date(),
   img: Joi.array(),
+  userid: Joi.object(),
   }).label("PlacemarkBase");
 
 export const PlacemarkSpec = PlacemarkSpecBase.keys({
@@ -49,5 +50,9 @@ export const JwtAuth = Joi.object()
   .keys({
     success: Joi.boolean().example("true").required(),
     token: Joi.string().example("eyJhbGciOiJND.g5YmJisIjoiaGYwNTNjAOhE.gCWGmY5-YigQw0DCBo").required(),
+    id: IdSpec,
+    scope: Joi.array(),
   })
   .label("JwtAuth");
+
+export const NumberSpec = Joi.alternatives().try(Joi.number(), Joi.object()).description("a valid number");
