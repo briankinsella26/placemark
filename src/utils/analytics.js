@@ -32,4 +32,16 @@ export const analytics = {
     return placemarks.slice(0, noOfPlacemarks);
   },
 
+  async getPlacemarksPerCategory(noOfPlacemarks){
+    const placemarks = await db.placemarkStore.getAllPlacemarks();
+    placemarks.sort((a, b) => b.createdate - a.createdate);
+    return placemarks.slice(0, noOfPlacemarks);
+  },
+
+  async getPlacemarksTotalsByCreatedDate(noOfPlacemarks){
+    const placemarks = await db.placemarkStore.getAllPlacemarks();
+    placemarks.sort((a, b) => b.createdate - a.createdate);
+    return placemarksTotals;
+  },
+
 }

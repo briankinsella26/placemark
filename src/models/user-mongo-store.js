@@ -29,7 +29,13 @@ export const userMongoStore = {
 
   async updateUser(updatedUser) {
     console.log(updatedUser)
-    await User.findByIdAndUpdate(updatedUser._id, updatedUser)
+    await User.findByIdAndUpdate(updatedUser._id, updatedUser, (err, docs) => {
+      if (err){
+          console.log(err)
+          return null
+      } 
+      return updatedUser
+    })
   },
 
   async updatePlacemark(placemark, updatedPlacemark) {

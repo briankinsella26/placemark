@@ -51,4 +51,17 @@ export const placemarkMongoStore = {
     placemark.location = updatedPlacemark.location
     await Placemark.findByIdAndUpdate(placemark._id, placemark);
   },
+
+  async updatePlacemarkDetails(updatedPlacemark) {
+    console.log(updatedPlacemark._id)
+    console.log(updatedPlacemark)
+    await Placemark.findByIdAndUpdate(updatedPlacemark._id, updatedPlacemark, (err, docs) => {
+      if (err){
+          console.log(err)
+          return null
+      } 
+      return updatedPlacemark
+    })
+  },
+  
 };
