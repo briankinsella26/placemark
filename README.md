@@ -35,6 +35,8 @@ For local development:
 on command line enter: 'npm run dev'
 in browser visit localhost:3000
 
+Provides an API to FE svelte app
+
 To run all tests locally
 on command line enter: 'npm run ci'
 
