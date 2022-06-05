@@ -82,7 +82,7 @@ async function init() {
 
   db.init("mongo");
   server.route(webRoutes);
-  server.route(apiRoutes)
+  server.route(apiRoutes, { payload: { maxBytes: 10485760 } })
   await server.start();
   console.log("Server running on %s", server.info.uri);
 }

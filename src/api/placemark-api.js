@@ -3,6 +3,7 @@ import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
 import { PlacemarkSpec, PlacemarkSpecPlus, PlacemarkArraySpec, IdSpec } from "../models/joi-schemas.js";
 import { validationError } from "./logger.js";
+import { imageStore } from "../models/image-store.js";
 
 export const placemarkApi = {
   find: {
@@ -64,14 +65,12 @@ export const placemarkApi = {
   },
 
   create: {
-    auth: {
-      strategy: "jwt",
-    },
+    auth: false,
     handler: async function (request, h) {
       try {
         const placemark = request.payload;
-        console.log(placemark);
-        const newPlacemark = await db.placemarkStore.addPlacemark(placemark);
+        console.log(placemark.placemark);
+        const newPlacemark = await db.placemarkStore.addPlacemark(placemark.placemark);
         if (newPlacemark) {
           return h.response(newPlacemark).code(201);
         }
@@ -154,14 +153,13 @@ export const placemarkApi = {
       try {
         const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
         const file = request.payload.imagefile;
-        if (Object.keys(file).length > 0) {
-          const response = await imageStore.uploadImage(request.payload.image);
-          placemark.img = response;
-          placemark.img.tags.push({placemarkid: request.params.id})
-          db.placemarkStore.addImageToPlacemark(placemark);
-          return h.response().code(200);
-        }
-        return Boom.badImplementation("error uploading image");
+        const response = await imageStore.uploadImage(request.payload.image);
+        console.log(response);
+        placemark.img = response;
+        placemark.img.tags.push({placemarkid: request.params.id})
+        console.log(placemark.img)
+        db.placemarkStore.addImageToPlacemark(placemark);
+        return h.response().code(200);
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
       }
