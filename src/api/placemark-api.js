@@ -69,7 +69,6 @@ export const placemarkApi = {
     handler: async function (request, h) {
       try {
         const placemark = request.payload;
-        console.log(placemark.placemark);
         const newPlacemark = await db.placemarkStore.addPlacemark(placemark.placemark);
         if (newPlacemark) {
           return h.response(newPlacemark).code(201);
@@ -82,8 +81,8 @@ export const placemarkApi = {
     tags: ["api"],
     description: "Create a placemark",
     notes: "Returns the newly created placemark",
-    // validate: { payload: PlacemarkSpec, failAction: validationError },
-    // response: { schema: PlacemarkSpecPlus, failAction: validationError },
+    validate: { payload: PlacemarkSpec, failAction: validationError },
+    response: { schema: PlacemarkSpecPlus, failAction: validationError },
   },
 
   deleteOne: {
@@ -154,10 +153,8 @@ export const placemarkApi = {
         const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
         const file = request.payload.imagefile;
         const response = await imageStore.uploadImage(request.payload.image);
-        console.log(response);
         placemark.img = response;
         placemark.img.tags.push({placemarkid: request.params.id})
-        console.log(placemark.img)
         db.placemarkStore.addImageToPlacemark(placemark);
         return h.response().code(200);
       } catch (err) {

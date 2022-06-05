@@ -1,9 +1,12 @@
 /* eslint-disable func-names */
+import bcrypt from "bcrypt";
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
 import { UserCredentialsSpec, UserSpec, UserSpecPlus, IdSpec, UserArray, JwtAuth } from "../models/joi-schemas.js";
 import { validationError } from "./logger.js";
 import { createToken } from "./jwt-utils.js";
+
+const saltRounds = 10; 
 
 export const userApi = {
 
@@ -12,9 +15,10 @@ export const userApi = {
     handler: async function(request, h) {
       try {
         const user = await db.userStore.getUserByEmail(request.payload.email);
+        const passwordsMatch = await bcrypt.compare(request.payload.password, user.password);
         if (!user) {
           return Boom.unauthorized("User not found");
-        } if (user.password !== request.payload.password) {
+        } if (!passwordsMatch) {
           return Boom.unauthorized("Invalid password");
         } 
         const token = createToken(user);
@@ -75,6 +79,8 @@ export const userApi = {
     auth: false,
     handler: async function (request, h) {
       try {
+        const userPayload = request.payload;
+        userPayload.password = await bcrypt.hash(userPayload.password, saltRounds);
         const user = await db.userStore.addUser(request.payload);
         if (user) {
           return h.response(user).code(201);
