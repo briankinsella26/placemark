@@ -20,6 +20,7 @@ export const imageStore = {
 
   uploadImage: async function(image) {
     const buffer = Buffer.from(image, "base64")
+    await writeFileSync("./public/temp.img", buffer);
     const response = await cloudinary.v2.uploader.upload("./public/temp.img");
     return response;
   },
